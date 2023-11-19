@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://rvmi.aau.dk/ontologies/iiwa.owl#"
+     xml:tts="http://rvmi.aau.dk/ontologies/iiwa.owl"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skiros="http://rvmi.aau.dk/ontologies/skiros.owl#"
+     xmlns:tts="http://rvmi.aau.dk/ontologies/iiwa.owl#">
+    <owl:Ontology rdf:about="http://rvmi.aau.dk/ontologies/iiwa.owl">
+        <owl:imports rdf:resource="http://rvmi.aau.dk/ontologies/skiros.owl"/>
+    </owl:Ontology>
+    
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Datatypes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://rvmi.aau.dk/ontologies/tts.owl#MyDataType 
+
+    <owl:DatatypeProperty rdf:about="http://rvmi.aau.dk/ontologies/iiwa.owl#MyDataType"/>-->
+        <!--rdfs:subPropertyOf rdf:resource="http://rvmi.aau.dk/ontologies/skiros.owl#DeviceProperty"/>
+    </owl:DatatypeProperty>-->
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Relations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <!-- http://rvmi.aau.dk/ontologies/skiros.owl#MyRelation 
+
+    <owl:ObjectProperty rdf:about="http://rvmi.aau.dk/ontologies/iiwa.owl#conditionProperty"/> -->
+    
+
+    <!-- http://rvmi.aau.dk/ontologies/skiros.owl#at 
+
+    <owl:ObjectProperty rdf:about="http://rvmi.aau.dk/ontologies/iiwa.owl#at">
+        <rdfs:subPropertyOf rdf:resource="http://rvmi.aau.dk/ontologies/skiros.owl#conditionProperty"/>
+    </owl:ObjectProperty>-->
+    
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    <!-- http://rvmi.aau.dk/ontologies/skiros.owl#tts_robot -->
+
+    <owl:NamedIndividual rdf:about="http://rvmi.aau.dk/ontologies/iiwa.owl#iiwa_robot">
+        <rdf:type rdf:resource="http://www.inf.ufrgs.br/phi-group/ontologies/cora.owl#Robot"/>
+        <skiros:DiscreteReasoner>AauSpatialReasoner</skiros:DiscreteReasoner>
+        <skiros:SkillMgr>/iiwa_robot</skiros:SkillMgr>
+    </owl:NamedIndividual>
+</rdf:RDF>
