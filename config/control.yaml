@@ -18,10 +18,26 @@ CartesianImpedance_trajectory_controller:
   delta_tau_max: 1.0                    # Max. commanded torque diff between steps in Nm
   filtering:                            # Update existing values (0.0 1.0] per s
     nullspace_config: 0.1               # Nullspace configuration filtering
-    pose: 0.1                           # Reference pose filtering
-    stiffness: 0.1                      # Cartesian and nullspace stiffness
-    wrench: 0.1                         # Commanded torque
+    pose: 1.0                           # Reference pose filtering
+    stiffness: 1.0                      # Cartesian and nullspace stiffness
+    wrench: 1.0                         # Commanded torque
   verbosity:
     verbose_print: false                # Enables additional prints
     state_msgs: false                   # Messages of controller state
-    tf_frames: false                    # Extra tf frames
+    tf_frames: true                    # Extra tf frames
+
+# Trajectory Generator
+cartesian_trajectory_generator:
+  pose_topic: /iiwa/CartesianImpedance_trajectory_controller/reference_pose
+  new_goal_topic: new_goal
+  current_goal_topic: current_goal
+  frame_name: world
+  ee_link: iiwa_link_ee
+  publish_rate: 100
+  trans_v_max: 0.2
+  rot_v_max: 0.5
+  trans_a: 0.1
+  rot_a: 0.5
+  trans_goal_threshold_default: 0.04
+  rot_goal_threshold_default: 0.25
+  sync: true
