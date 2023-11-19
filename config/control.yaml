@@ -1,0 +1,27 @@
+CartesianImpedance_trajectory_controller:
+  type: cartesian_impedance_controller/CartesianImpedanceController
+  joints:                               # Joints to control
+    - iiwa_joint_1
+    - iiwa_joint_2
+    - iiwa_joint_3
+    - iiwa_joint_4
+    - iiwa_joint_5
+    - iiwa_joint_6
+    - iiwa_joint_7
+  end_effector: iiwa_link_ee            # Link to control arm in
+  update_frequency: 500                 # Controller update frequency in Hz
+  # Optional parameters - the mentioned values are the defaults
+  dynamic_reconfigure: true             # Starts dynamic reconfigure server
+  handle_trajectories: true             # Accept traj., e.g. from MoveIt
+  robot_description: /robot_description # In case of a varying name
+  wrench_ee_frame: iiwa_link_ee         # Default frame for wrench commands
+  delta_tau_max: 1.0                    # Max. commanded torque diff between steps in Nm
+  filtering:                            # Update existing values (0.0 1.0] per s
+    nullspace_config: 0.1               # Nullspace configuration filtering
+    pose: 0.1                           # Reference pose filtering
+    stiffness: 0.1                      # Cartesian and nullspace stiffness
+    wrench: 0.1                         # Commanded torque
+  verbosity:
+    verbose_print: false                # Enables additional prints
+    state_msgs: false                   # Messages of controller state
+    tf_frames: false                    # Extra tf frames

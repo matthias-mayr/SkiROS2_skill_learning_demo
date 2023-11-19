@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- These are the arguments you can pass this launch file, for example paused:=true -->
+    <arg name="paused" default="false"/>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="gui" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="debug" default="false"/>
+    <arg name="world_name" default="$(find iiwa_gazebo)/world/iiwa.world"/> 
+    <arg name="gzclient" default="false"/>
+
+    <!-- Select the robot -->
+    <arg name="robot_name" default="iiwa"/>
+    <arg name="model" default="7" />
+
+    <!-- Select the controller -->
+    <arg name="controller" default="CartesianImpedance_trajectory_controller"/>
+
+    <!-- Setup iiwa -->
+    <include file="$(find iiwa_driver)/launch/iiwa_setup.launch">
+        <arg name="robot_name" value="$(arg robot_name)"/>
+        <arg name="model" value="$(arg model)"/>
+        <arg name="controller" value="$(arg controller)"/>
+    </include>
+
+    <!-- Loads the Gazebo world -->
+    <include unless="$(arg gzclient)"
+        file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg world_name)"/> 
+        <arg name="debug" value="$(arg debug)" />
+        <arg name="gui" value="$(arg gui)" />
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+        <arg name="headless" value="$(arg headless)"/>
+    </include>
+
+    <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-urdf -model iiwa -param robot_description"/>
+
+    <!-- Spawn controller -->
+    <rosparam file="$(find skiros2_skill_learning_demo)/config/control.yaml" command="load" ns="$(arg robot_name)"/> 
+    <include file="$(find iiwa_control)/launch/iiwa_control.launch">
+       <arg name="controller" value="$(arg controller)"/>
+    </include>
+</launch>
