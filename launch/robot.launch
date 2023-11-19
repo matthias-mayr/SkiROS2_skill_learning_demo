@@ -3,11 +3,12 @@
     <!-- These are the arguments you can pass this launch file, for example paused:=true -->
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
-    <arg name="gui" default="true"/>
+    <arg name="gazebo_gui" default="true"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
     <arg name="world_name" default="$(find iiwa_gazebo)/world/iiwa.world"/> 
     <arg name="gzclient" default="false"/>
+    <arg name="rviz" default="true"/>
 
     <!-- Select the robot -->
     <arg name="robot_name" default="iiwa"/>
@@ -28,7 +29,7 @@
         file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(arg world_name)"/> 
         <arg name="debug" value="$(arg debug)" />
-        <arg name="gui" value="$(arg gui)" />
+        <arg name="gui" value="$(arg gazebo_gui)" />
         <arg name="paused" value="$(arg paused)"/>
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
         <arg name="headless" value="$(arg headless)"/>
@@ -49,4 +50,7 @@
         <node name= "cartesian_trajectory_generator" pkg= "cartesian_trajectory_generator" type="cartesian_trajectory_generator" output="screen">
         </node>
     </group>
+
+    <!-- RViz -->
+    <node if="$(arg rviz)" name="rviz" pkg="rviz" type="rviz" args="-d $(find skiros2_skill_learning_demo)/config/robot.rviz" required="true" output="screen"/>
 </launch>
