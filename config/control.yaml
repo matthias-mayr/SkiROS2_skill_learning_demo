@@ -32,7 +32,7 @@ cartesian_trajectory_generator:
   new_goal_topic: new_goal
   current_goal_topic: current_goal
   frame_name: world
-  ee_link: iiwa_link_ee
+  ee_link: peg
   publish_rate: 100
   trans_v_max: 0.2
   rot_v_max: 0.5
