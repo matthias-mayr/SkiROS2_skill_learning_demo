@@ -3,9 +3,10 @@
   <arg name="debug" default="false"/>
   <arg name="robot_ontology_prefix" default="iiwa"/>
   <arg name="robot_name" default="iiwa_robot"/>
+  <arg name="init_scene" default="scenes/simulation.turtle"/>
 
   <include file="$(find skiros2)/launch/world_model_server.launch">
-      <arg name="init_scene" value=""/>
+      <arg name="init_scene" value="$(arg init_scene)"/>
       <arg name="verbose" value="false"/>
       <arg name="deploy" value="true"/>
       <arg name="gui" value="true"/>

@@ -1,0 +1,193 @@
+@prefix cora: <http://www.inf.ufrgs.br/phi-group/ontologies/cora.owl#> .
+@prefix iiwa: <http://rvmi.aau.dk/ontologies/iiwa.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skiros: <http://rvmi.aau.dk/ontologies/skiros.owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rparts: <http://www.inf.ufrgs.br/phi-group/ontologies/RParts.owl#> .
+
+skiros:Scene-0 a skiros:Scene,
+        owl:NamedIndividual ;
+    rdfs:label "" ;
+    skiros:BaseFrameId ""^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "map"^^xsd:string ;
+    skiros:OrientationW "1.0"^^xsd:float ;
+    skiros:OrientationX "0.0"^^xsd:float ;
+    skiros:OrientationY "0.0"^^xsd:float ;
+    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:PositionX "0.0"^^xsd:float ;
+    skiros:PositionY "0.0"^^xsd:float ;
+    skiros:PositionZ "0.0"^^xsd:float ;
+    skiros:PublishTf true ;
+    skiros:contain cora:Robot-1 .
+
+skiros:ApplyForce a owl:class ;
+    rdfs:subClassOf skiros:PrimitiveSkills .
+
+skiros:ApplyForce-13 a skiros:ApplyForce,
+        owl:NamedIndividual ;
+    rdfs:label "apply_force" ;
+    skiros:hasParam skiros:Parameter-14,
+        skiros:Parameter-15 .
+
+skiros:ArmMovement a owl:class ;
+    rdfs:subClassOf skiros:PrimitiveSkills .
+
+skiros:ArmMovement-2 a skiros:ArmMovement,
+        owl:NamedIndividual ;
+    rdfs:label "go_to_linear_action" ;
+    skiros:hasParam skiros:Parameter-3,
+        skiros:Parameter-4,
+        skiros:Parameter-5,
+        skiros:Parameter-6 ;
+    skiros:hasPostCondition skiros:ConditionRelation-9 ;
+    skiros:hasPreCondition skiros:ConditionRelation-7,
+        skiros:ConditionRelation-8 .
+
+skiros:ChangeStiffness a owl:class ;
+    rdfs:subClassOf skiros:PrimitiveSkills .
+
+skiros:ChangeStiffness-10 a skiros:ChangeStiffness,
+        owl:NamedIndividual ;
+    rdfs:label "change_stiffness" ;
+    skiros:hasParam skiros:Parameter-11,
+        skiros:Parameter-12 .
+
+skiros:ConditionRelation-7 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ArmAtStart" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "Start"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-8 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "NotArmAtTarget" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState false ;
+    skiros:hasObject "Target"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-9 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ArmAtTarget" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "Target"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:OverlayMotion a owl:class ;
+    rdfs:subClassOf skiros:PrimitiveSkills .
+
+skiros:OverlayMotion-16 a skiros:OverlayMotion,
+        owl:NamedIndividual ;
+    rdfs:label "overlay_motion" ;
+    skiros:hasParam skiros:Parameter-17,
+        skiros:Parameter-18 .
+
+skiros:Parameter-11 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-12 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-14 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-15 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-17 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-18 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-3 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-4 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Target" ;
+    skiros:DataType "sumo:Object"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-5 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Start" ;
+    skiros:DataType "sumo:Object"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-6 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Skiros2SkillLearningDemo a owl:class ;
+    rdfs:subClassOf skiros:Skill .
+
+cora:Robot-1 a cora:Robot,
+        owl:NamedIndividual ;
+    rdfs:label "iiwa:iiwa_robot" ;
+    skiros:BaseFrameId ""^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "cora:Robot-1"^^xsd:string ;
+    skiros:PublishTf true ;
+    skiros:SkillMgr "iiwa_robot"^^xsd:string ;
+    skiros:Template "iiwa:iiwa_robot"^^xsd:string ;
+    skiros:hasA rparts:ArmDevice-2;
+    skiros:hasSkill skiros:ApplyForce-13,
+        skiros:ArmMovement-2,
+        skiros:ChangeStiffness-10,
+        skiros:OverlayMotion-16 ;
+    skiros:hasTemplate iiwa:iiwa_robot .
+
+rparts:ArmDevice-2 a rparts:ArmDevice,
+        owl:NamedIndividual ;
+    rdfs:label "iiwa Arm" ;
+    skiros:BaseFrameId "cora:Robot-1"^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:CartesianStiffnessTopic "/iiwa/CartesianImpedance_trajectory_controller/set_cartesian_stiffness"^^xsd:string ;
+    skiros:CartesianWrenchTopic "/iiwa/CartesianImpedance_trajectory_controller/set_cartesian_wrench"^^xsd:string ;
+    skiros:CartesianGoalAction "/iiwa/cartesian_trajectory_generator/goal_action"^^xsd:string ;
+    skiros:OverlayMotionService "/iiwa/cartesian_trajectory_generator/overlay_motion"^^xsd:string ;
+    skiros:Weight "20.0"^^xsd:float .
+
+
+skiros:PrimitiveSkills a owl:class ;
+    rdfs:subClassOf skiros:Skiros2SkillLearningDemo .
+
