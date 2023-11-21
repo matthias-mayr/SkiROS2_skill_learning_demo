@@ -62,7 +62,7 @@
     </joint>
 
     <gazebo reference="peg_base">
-        <turnGravityOff>true</turnGravityOff>
+        <turnGravityOff>false</turnGravityOff>
         <material>Gazebo/Indigo</material>
         <mu1>0.005</mu1>
         <mu2>0.005</mu2>
