@@ -1,5 +1,5 @@
 <launch>
-  <arg name="skill_list" default="[my_primitive, my_skill]"/>
+  <arg name="skill_list" default="[go_to_linear_action, change_stiffness, apply_force, overlay_motion]"/>
   <arg name="debug" default="false"/>
   <arg name="robot_ontology_prefix" default="iiwa"/>
   <arg name="robot_name" default="iiwa_robot"/>
