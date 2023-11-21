@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- =================================================================================== -->
+<!-- |    This document was written by hand                                            | -->
+<!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
+<!-- =================================================================================== -->
+<robot name="box_with_hole" xmlns:xacro="http://ros.org/wiki/xacro">
+  <material name="Orange">
+    <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+  </material>
+  <link name="world"/>
+  <link name="box_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <geometry>
+        <!-- <box size="0.1143 0.1143 0.0545"/> -->
+        <mesh filename="package://skiros2_skill_learning_demo/res/peg_and_hole/block_with_hole_150.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="Orange"/>
+    </visual>
+    <collision>
+      <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      <geometry>
+        <mesh filename="package://skiros2_skill_learning_demo/res/peg_and_hole/block_with_hole_150.stl" scale="0.001 0.001 0.001"/>
+        <!-- <box size="0.1143 0.1143 0.0545"/> -->
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.005</mu>
+            <mu2>0.005</mu2>
+          </ode>
+        </friction>
+      </surface>
+    </collision>
+    <inertial>
+      <!-- CENTER OF MASS -->
+      <origin rpy="0 0 0" xyz="0.075 0.075 0.05"/>
+      <mass value="0.2"/>
+      <!-- box inertia: 1/12*m(y^2+z^2), ... -->
+      <inertia ixx="0.000267245666667" ixy="0" ixz="0" iyy="0.000267245666667" iyz="0" izz="0.000435483"/>
+    </inertial>
+  </link>
+  <!-- joint between world and box_link -->
+  <joint name="box_joint" type="fixed">
+    <origin rpy="0 0 0" xyz="0.425 -0.075 0.0"/>
+    <parent link="world"/>
+    <child link="box_link"/>
+  </joint>
+  <gazebo reference="box_link">
+    <turnGravityOff>true</turnGravityOff>
+    <material>Gazebo/Orange</material>
+    <mu1>0.005</mu1>
+    <mu2>0.005</mu2>
+  </gazebo>
+</robot>

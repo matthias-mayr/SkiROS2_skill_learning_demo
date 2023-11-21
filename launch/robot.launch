@@ -9,6 +9,7 @@
     <arg name="world_name" default="$(find iiwa_gazebo)/world/iiwa.world"/> 
     <arg name="gzclient" default="false"/>
     <arg name="rviz" default="true"/>
+    <arg name="load_box" default="true"/> 
 
     <!-- Select the robot -->
     <arg name="robot_name" default="iiwa"/>
@@ -18,11 +19,16 @@
     <arg name="controller" default="CartesianImpedance_trajectory_controller"/>
 
     <!-- Setup iiwa -->
-    <include file="$(find iiwa_driver)/launch/iiwa_setup.launch">
-        <arg name="robot_name" value="$(arg robot_name)"/>
-        <arg name="model" value="$(arg model)"/>
-        <arg name="controller" value="$(arg controller)"/>
-    </include>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find skiros2_skill_learning_demo)/res/urdf/iiwa7_with_peg.urdf.xacro' hardware_interface:=EffortJointInterface robot_name:=$(arg robot_name)" />
+    <!-- Spawn iiwa service -->
+    <include file="$(find iiwa_tools)/launch/iiwa_service.launch"/>
+
+    <!-- Spawn box in Gazebo -->
+    <group if="$(arg load_box)">
+        <param name="/box_with_hole" textfile="$(find skiros2_skill_learning_demo)/res/urdf/box_with_hole.urdf"/>
+        <node name="box_urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+                    args="-urdf -model box_with_hole -param /box_with_hole"/>
+    </group>
 
     <!-- Loads the Gazebo world -->
     <include unless="$(arg gzclient)"

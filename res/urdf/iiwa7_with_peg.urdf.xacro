@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iiwa7_with_peg">
+    <!-- Import Rviz colors -->
+    <xacro:include filename="$(find iiwa_description)/urdf/materials.xacro" />
+    <!--Import the lbr iiwa macro -->
+    <xacro:include filename="$(find iiwa_description)/urdf/iiwa7.xacro"/>
+
+    <xacro:arg name="hardware_interface" default="PositionJointInterface"/>
+    <xacro:arg name="robot_name" default="iiwa"/>
+    <xacro:arg name="origin_xyz" default="0 0 0"/>
+    <xacro:arg name="origin_rpy" default="0 0 0"/>
+
+    <!-- Macro for the inertia of a box -->
+    <xacro:macro name="box_inertia" params="x y z mass">
+      <inertia ixx="${0.0833333 * mass * (y*y + z*z)}" ixy="0.0" ixz="0.0"
+        iyy="${0.0833333 * mass * (x*x + z*z)}" iyz="0.0"
+        izz="${0.0833333 * mass * (x*x + y*y)}" />
+    </xacro:macro>
+
+    <link name="world"/>
+  
+    <!--iiwa-->
+    <xacro:iiwa7 hardware_interface="$(arg hardware_interface)" robot_name="$(arg robot_name)" parent="world" collision_postfix="">
+        <origin xyz="$(arg origin_xyz)" rpy="$(arg origin_rpy)" />
+    </xacro:iiwa7>
+
+    <link name="peg_base">
+      <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="0.3"/> <!-- Rough guess -->
+        <xacro:box_inertia x="0.05" y="0.05" z="0.1" mass="0.3"/>
+      </inertial>
+      <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+          <mesh filename="package://skiros2_skill_learning_demo/res/peg_and_hole/peg_3mm.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name=" ">
+          <color rgba="0.25 0.0 0.5 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin
+            xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+            <mesh filename="package://skiros2_skill_learning_demo/res/peg_and_hole/peg_3mm.stl" scale="0.001 0.001 0.001" />
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="ee_peg_base_joint" type="fixed">
+        <parent link="$(arg robot_name)_link_ee"/>
+        <child link="peg_base"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <link name="peg"/>
+    <joint name="peg_end_joint" type="fixed">
+        <parent link="peg_base"/>
+        <child link="peg"/>
+        <origin rpy="0 0 0" xyz="0 0 0.1"/>
+    </joint>
+
+    <gazebo reference="peg_base">
+        <turnGravityOff>true</turnGravityOff>
+        <material>Gazebo/Indigo</material>
+        <mu1>0.005</mu1>
+        <mu2>0.005</mu2>
+    </gazebo>
+
+</robot>
