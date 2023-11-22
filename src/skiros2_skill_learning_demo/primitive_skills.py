@@ -38,12 +38,12 @@ class ChangeStiffness(SkillDescription):
 
     def createDescription(self):
         self.addParam("Arm", Element("rparts:ArmDevice"), ParamTypes.Required)
-        self.addParam("TransX", -1.0, ParamTypes.Optional)
-        self.addParam("TransY", -1.0, ParamTypes.Optional)
-        self.addParam("TransZ", -1.0, ParamTypes.Optional)
-        self.addParam("RotX", -1.0, ParamTypes.Optional)
-        self.addParam("RotY", -1.0, ParamTypes.Optional)
-        self.addParam("RotZ", -1.0, ParamTypes.Optional)
+        self.addParam("TransX", 400.0, ParamTypes.Optional)
+        self.addParam("TransY", 400.0, ParamTypes.Optional)
+        self.addParam("TransZ", 400.0, ParamTypes.Optional)
+        self.addParam("RotX", 40.0, ParamTypes.Optional)
+        self.addParam("RotY", 40.0, ParamTypes.Optional)
+        self.addParam("RotZ", 40.0, ParamTypes.Optional)
 
 
 class ApplyForce(SkillDescription):
