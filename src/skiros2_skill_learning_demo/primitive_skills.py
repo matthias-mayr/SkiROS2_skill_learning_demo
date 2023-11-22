@@ -17,7 +17,7 @@ import cartesian_trajectory_generator.srv
 #################################################################################
 
 
-class ArmMovement(SkillDescription):
+class ArmMovementAction(SkillDescription):
     """
     @brief      Any arm movement that brings the end-effector to the target pose
     """
@@ -26,9 +26,6 @@ class ArmMovement(SkillDescription):
         # =======Params=========
         self.addParam("Arm", Element("rparts:ArmDevice"), ParamTypes.Required)
         self.addParam("Target", Element("sumo:Object"), ParamTypes.Required)
-        self.addParam("Start", Element("sumo:Object"), ParamTypes.Inferred)
-        # =======PreConditions=========
-        self.addPreCondition(self.getRelationCond("ArmAtStart", "skiros:at", "Arm", "Start", True))
 
 
 class ChangeStiffness(SkillDescription):
@@ -86,7 +83,7 @@ class go_to_linear_action(PrimitiveActionClient):
     """
 
     def createDescription(self):
-        self.setDescription(ArmMovement(), self.__class__.__name__)
+        self.setDescription(ArmMovementAction(), self.__class__.__name__)
 
     def buildClient(self):
         if not self.params["Arm"].value.hasProperty("skiros:CartesianGoalAction"):
