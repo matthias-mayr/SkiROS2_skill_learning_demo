@@ -1,4 +1,5 @@
 from skiros2_skill.core.skill import SkillDescription
+from skiros2_common.core.conditions import ConditionHasProperty
 from skiros2_common.core.params import ParamTypes
 from skiros2_common.core.world_element import Element
 from skiros2_common.core.primitive import PrimitiveBase
@@ -133,8 +134,21 @@ class go_to_linear_action(PrimitiveActionClient):
             return self.fail("Unknown return code.", -100)
 
 class change_stiffness(PrimitiveBase):
+    """
+    @brief Commands a robot controller to apply a stiffness
+
+    Publishes a geometry_msgs:WrenchStamped message to the specified topic.
+
+    @return - Success:  After n seconds
+            - Fail:     Never
+            - Running:  Until n seconds
+    """
+
     def createDescription(self):
         self.setDescription(ChangeStiffness(), self.__class__.__name__)
+
+    def modifyDescription(self, skill):
+        skill.addPreCondition(ConditionHasProperty("ArmHasCartesianStiffnessTopic", "skiros:CartesianStiffnessTopic", "Arm", True))
 
     def onInit(self):
         self.topic = ""
@@ -149,6 +163,7 @@ class change_stiffness(PrimitiveBase):
             self.topic = topic
             self.pub = rospy.Publisher(
                 self.topic, geometry_msgs.msg.WrenchStamped, queue_size=10)
+            rospy.sleep(0.2) # Wait for publisher to be ready
         msg = geometry_msgs.msg.WrenchStamped()
         msg.header.stamp = rospy.Time.now()
         msg.wrench.force.x = self.params["TransX"].value
@@ -160,7 +175,7 @@ class change_stiffness(PrimitiveBase):
         self.pub.publish(msg)
 
         self.start_time = rospy.Time.now()
-        self.max_time = rospy.Duration(2.0)
+        self.max_time = rospy.Duration(0.0)
         return True
 
     def execute(self):
@@ -170,20 +185,42 @@ class change_stiffness(PrimitiveBase):
 
 
 class apply_force(PrimitiveBase):
+    """
+    @brief Applies a force with the end effector. Persistent skill.
+
+    Publishes the force values to a specified topic as geometry_msgs:WrenchStamped.
+
+    @return - Success:  Never
+            - Fail:     Never
+            - Running:  Always
+    """
+
     def createDescription(self):
         self.setDescription(ApplyForce(), self.__class__.__name__)
+
+    def modifyDescription(self, skill):
+        skill.addPreCondition(ConditionHasProperty("ArmHasCartesianWrenchTopic", "skiros:CartesianWrenchTopic", "Arm", True))
 
     def onInit(self):
         self.topic = ""
         self.prop = "skiros:CartesianWrenchTopic"
 
+    def onPreempt(self):
+        self.msg = geometry_msgs.msg.WrenchStamped()
+        self.msg.header.stamp = rospy.Time.now()
+        self.pub.publish(self.msg)
+        return self.success("Set force to 0")
+
     def onStart(self):
         if not self.params["Arm"].value.hasProperty(self.prop):
             rospy.logerr("Arm does not have required property %s", self.prop)
             return False
-        self.topic = self.params["Arm"].value.getProperty(self.prop).value
-        self.pub = rospy.Publisher(
-            self.topic, geometry_msgs.msg.WrenchStamped, queue_size=10)
+        topic = self.params["Arm"].value.getProperty(self.prop).value
+        if topic != self.topic:
+            self.topic = topic
+            self.pub = rospy.Publisher(
+                self.topic, geometry_msgs.msg.WrenchStamped, queue_size=10)
+            rospy.sleep(0.2) # Wait for publisher to be ready
         self.msg = geometry_msgs.msg.WrenchStamped()
         self.msg.header.stamp = rospy.Time.now()
         self.msg.wrench.force.x = self.params["TransX"].value
@@ -192,27 +229,40 @@ class apply_force(PrimitiveBase):
         self.msg.wrench.torque.x = self.params["RotX"].value
         self.msg.wrench.torque.y = self.params["RotY"].value
         self.msg.wrench.torque.z = self.params["RotZ"].value
-        self.published = False
-        rospy.loginfo("Topic: %s", self.topic)
-
-        self.start_time = rospy.Time.now()
-        self.max_time = rospy.Duration(2.0)
+        self.pub.publish(self.msg)
         return True
 
     def execute(self):
-        self.pub.publish(self.msg)
-        if (rospy.Time.now() - self.start_time) > self.max_time:
-            return self.success("Assuming force change has worked")
-        return self.step("Changing force.")
+        return self.step("Changing to wrench {}.".format(self.msg.wrench))
+
 
 class overlay_motion(PrimitiveBase):
+    """
+    @brief Applies an overlay motion with the trajectory generator. Persistent skill.
+
+    This applies an overlay motion while the skill is running. It uses the Cartesian trajectory generator.
+    The overlay motion is automatically cancelled when the skill is preempted.
+
+    @return - Success:  Never
+            - Fail:     Never. Wrong motions abort the start
+            - Running:  Always
+    """
+
     def createDescription(self):
         self.setDescription(OverlayMotion(), self.__class__.__name__)
+
+    def modifyDescription(self, skill):
+        skill.addPreCondition(ConditionHasProperty("ArmHasOverlayMotionService", "skiros:OverlayMotionService", "Arm", True))
 
     def onInit(self):
         self.topic = ""
         self.prop = "skiros:OverlayMotionService"
         self.serv_obj = None
+
+    def onPreempt(self):
+        req = cartesian_trajectory_generator.srv.OverlayMotionRequest()
+        req.motion = req.NONE
+        self.serv_obj(req)
 
     def onStart(self):
         if not self.params["Arm"].value.hasProperty(self.prop):
@@ -228,6 +278,8 @@ class overlay_motion(PrimitiveBase):
         req = cartesian_trajectory_generator.srv.OverlayMotionRequest()
         if self.params['Motion'].value == "archimedes":
             req.motion = req.ARCHIMEDES
+        elif self.params['Motion'].value == "":
+            req.motion = req.NONE
         else:
             rospy.logerr("Unknown overlay motion %s", self.params['Motion'].value)
 
@@ -245,6 +297,4 @@ class overlay_motion(PrimitiveBase):
         return True
 
     def execute(self):
-        if (rospy.Time.now() - self.start_time) > self.max_time:
-            return self.success("Assuming Overlay motion has changed")
         return self.step("Applying Overlay motion.")
