@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
-    <!-- These are the arguments you can pass this launch file, for example paused:=true -->
-    <arg name="paused" default="false"/>
+    <!-- Needs to be started paused so that the controller is started after the joint angles are set -->
+    <arg name="paused" default="true"/> 
     <arg name="use_sim_time" default="true"/>
     <arg name="gazebo_gui" default="true"/>
     <arg name="headless" default="false"/>
@@ -40,6 +40,8 @@
         <arg name="use_sim_time" value="$(arg use_sim_time)"/>
         <arg name="headless" value="$(arg headless)"/>
     </include>
+    <!-- Auto-unpause -->
+    <node if="$(arg paused)" name="unpause_gazebo" pkg="heron_gazebo" type="unpause_gazebo.sh" />
 
     <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
