@@ -1,4 +1,4 @@
-from skiros2_skill.core.skill import SkillDescription, SkillBase, ParallelFf, SerialStar
+from skiros2_skill.core.skill import SkillDescription, SkillBase, ParallelFs, SerialStar
 from skiros2_common.core.params import ParamTypes
 from skiros2_common.core.world_element import Element
 
@@ -29,9 +29,9 @@ class PegInsertion(SkillDescription):
         self.addParam("Arm", Element("rparts:ArmDevice"), ParamTypes.Required)
         self.addParam("Container", Element("skiros:Container"), ParamTypes.Required)
         self.addParam("Object", Element("skiros:Product"), ParamTypes.Required)
-        self.addParam("Force", 0.0, ParamTypes.Required)
-        self.addParam("Radius", 0.0, ParamTypes.Optional)
-        self.addParam("PathVelocity", 0.0, ParamTypes.Optional)
+        self.addParam("Force", 4.0, ParamTypes.Required)
+        self.addParam("Radius", 0.03, ParamTypes.Optional)
+        self.addParam("PathVelocity", 0.1, ParamTypes.Optional)
         self.addParam("PathDistance", 0.01, ParamTypes.Optional)
 
         # #=======PreConditions=========
@@ -66,15 +66,10 @@ class go_to_linear(SkillBase):
     def expand(self, skill):
         skill.setProcessor(SerialStar())
         skill(
-        #     self.skill(ParallelFf())(
-        #         # self.skill("ArmMovement", "go_to_linear_action"),
-        #         self.skill("ChangeStiffness", ""),
-        #         self.skill("ApplyForce", "")
-        #     ),
-            self.skill(ParallelFf())(
-                    self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'Target'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
-                    self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'Start'},  specify={'Relation': 'skiros:at', 'RelationState': False}),
-                ),
+            self.skill("ChangeStiffness", ""),
+            self.skill("ArmMovementAction", "go_to_linear_action"),
+            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'Target'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
+            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'Start'},  specify={'Relation': 'skiros:at', 'RelationState': False}),
         )
 
 
@@ -85,8 +80,15 @@ class peg_insertion(SkillBase):
     def expand(self, skill):
         skill.setProcessor(SerialStar())
         skill(
-                self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'ObservationPose'},  specify={'Relation': 'skiros:at', 'RelationState': False}),
-                self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Object', 'Dst': 'Container'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
+            self.skill("ChangeStiffness", "", specify={"TransZ": 0.0}),
+            self.skill(ParallelFs())(
+                self.skill("ArmMovementAction", "go_to_linear_action", remap= {'Target': 'Container'}),
+                self.skill("ApplyForce", "", specify={"TransZ": self.params["Force"].value}),
+                self.skill("OverlayMotion", "", specify={"Motion": "archimedes", "Radius": self.params["Radius"].value, "PathDistance": self.params["PathDistance"].value, "PathVelocity": self.params["PathVelocity"].value, "AllowDecrease": True, "Dir": [0.0, 0.0, 1.0]}),
+            ),
+            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'ObservationPose'},  specify={'Relation': 'skiros:at', 'RelationState': False}),
+            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Object', 'Dst': 'Container'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
+            self.skill("ChangeStiffness", ""),
             )
 
 class reset_peg_insertion(SkillBase):
@@ -96,6 +98,8 @@ class reset_peg_insertion(SkillBase):
     def expand(self, skill):
         skill.setProcessor(SerialStar())
         skill(
-            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'Container'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
+            self.skill("ChangeStiffness", ""),
+            self.skill("ArmMovementAction", "go_to_linear_action", remap= {'Target': 'ObservationPose'}),
+            self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Arm', 'Dst': 'ObservationPose'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
             self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Object', 'Dst': 'Container'},  specify={'Relation': 'skiros:at', 'RelationState': False}),
         )
