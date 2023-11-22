@@ -34,10 +34,10 @@ cartesian_trajectory_generator:
   frame_name: world
   ee_link: peg
   publish_rate: 100
-  trans_v_max: 0.2
-  rot_v_max: 0.5
-  trans_a: 0.1
-  rot_a: 0.5
-  trans_goal_threshold_default: 0.04
+  trans_v_max: 0.3
+  rot_v_max: 0.8
+  trans_a: 0.2
+  rot_a: 0.8
+  trans_goal_threshold_default: 0.045
   rot_goal_threshold_default: 0.25
   sync: true
