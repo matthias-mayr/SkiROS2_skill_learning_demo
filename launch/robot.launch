@@ -41,7 +41,7 @@
         <arg name="headless" value="$(arg headless)"/>
     </include>
     <!-- Auto-unpause -->
-    <node if="$(arg paused)" name="unpause_gazebo" pkg="heron_gazebo" type="unpause_gazebo.sh" />
+    <node if="$(arg paused)" name="unpause_gazebo" pkg="skiros2_skill_learning_demo" type="unpause_gazebo.sh" />
 
     <!-- Run a python script to send a service call to gazebo_ros to spawn a URDF robot -->
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
