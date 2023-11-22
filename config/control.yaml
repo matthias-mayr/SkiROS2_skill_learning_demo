@@ -8,13 +8,13 @@ CartesianImpedance_trajectory_controller:
     - iiwa_joint_5
     - iiwa_joint_6
     - iiwa_joint_7
-  end_effector: iiwa_link_ee            # Link to control arm in
+  end_effector: peg            # Link to control arm in
   update_frequency: 500                 # Controller update frequency in Hz
   # Optional parameters - the mentioned values are the defaults
   dynamic_reconfigure: true             # Starts dynamic reconfigure server
   handle_trajectories: true             # Accept traj., e.g. from MoveIt
   robot_description: /robot_description # In case of a varying name
-  wrench_ee_frame: iiwa_link_ee         # Default frame for wrench commands
+  wrench_ee_frame: peg         # Default frame for wrench commands
   delta_tau_max: 1.0                    # Max. commanded torque diff between steps in Nm
   filtering:                            # Update existing values (0.0 1.0] per s
     nullspace_config: 0.1               # Nullspace configuration filtering
