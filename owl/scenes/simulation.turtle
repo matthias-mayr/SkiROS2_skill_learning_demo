@@ -11,7 +11,7 @@ skiros:Scene-0 a skiros:Scene,
     rdfs:label "" ;
     skiros:BaseFrameId ""^^xsd:string ;
     skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
-    skiros:FrameId "map"^^xsd:string ;
+    skiros:FrameId "world"^^xsd:string ;
     skiros:OrientationW "1.0"^^xsd:float ;
     skiros:OrientationX "0.0"^^xsd:float ;
     skiros:OrientationY "0.0"^^xsd:float ;
@@ -20,6 +20,8 @@ skiros:Scene-0 a skiros:Scene,
     skiros:PositionY "0.0"^^xsd:float ;
     skiros:PositionZ "0.0"^^xsd:float ;
     skiros:PublishTf true ;
+    skiros:contain skiros:Container-4 ;
+    skiros:contain skiros:TransformationPose-6 ;
     skiros:contain cora:Robot-1 .
 
 skiros:ApplyForce a owl:class ;
@@ -185,7 +187,58 @@ rparts:ArmDevice-2 a rparts:ArmDevice,
     skiros:CartesianWrenchTopic "/iiwa/CartesianImpedance_trajectory_controller/set_cartesian_wrench"^^xsd:string ;
     skiros:CartesianGoalAction "/iiwa/cartesian_trajectory_generator/goal_action"^^xsd:string ;
     skiros:OverlayMotionService "/iiwa/cartesian_trajectory_generator/overlay_motion"^^xsd:string ;
+    skiros:contain skiros:Product-3 ;
+    skiros:at skiros:TransformationPose-6 ;
     skiros:Weight "20.0"^^xsd:float .
+
+skiros:Product-3 a skiros:Product, owl:NamedIndividual ;
+    rdfs:label "Peg" .
+
+skiros:Container-4 a skiros:Container, owl:NamedIndividual ;
+    rdfs:label "Box with hole" ;;
+    skiros:BaseFrameId "world"^^xsd:string ;
+    skiros:FrameId "skiros:Container-4"^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:OrientationW "0.0"^^xsd:float ;
+    skiros:OrientationX "1.0"^^xsd:float ;
+    skiros:OrientationY "0.0"^^xsd:float ;
+    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:PositionX "0.5"^^xsd:float ;
+    skiros:PositionY "0.0"^^xsd:float ;
+    skiros:PositionZ "0.05"^^xsd:float ;
+    skiros:PublishTf true ;
+    skiros:hasA skiros:ObservationPose-5 .
+
+skiros:ObservationPose-5 a skiros:ObservationPose,
+        owl:NamedIndividual ;
+    rdfs:label "Box observation" ;
+    skiros:BaseFrameId "skiros:Container-4"^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "skiros:ObservationPose-5"^^xsd:string ;
+    skiros:OrientationW "1.0"^^xsd:float ;
+    skiros:OrientationX "0.0"^^xsd:float ;
+    skiros:OrientationY "0.0"^^xsd:float ;
+    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:PositionX "0.0"^^xsd:float ;
+    skiros:PositionY "0.0"^^xsd:float ;
+    skiros:PositionZ "-0.4"^^xsd:float ;
+    skiros:PublishTf true .
+
+skiros:TransformationPose-6 a skiros:TransformationPose,
+        owl:NamedIndividual ;
+    rdfs:label "Start Pose" ;
+    skiros:BaseFrameId "world"^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "skiros:TransformationPose-6"^^xsd:string ;
+    skiros:OrientationW "0.0"^^xsd:float ;
+    skiros:OrientationX "1.0"^^xsd:float ;
+    skiros:OrientationY "0.0"^^xsd:float ;
+    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:PositionX "0.5"^^xsd:float ;
+    skiros:PositionY "0.0"^^xsd:float ;
+    skiros:PositionZ "0.5"^^xsd:float ;
+    skiros:PublishTf true .
+
 
 
 skiros:PrimitiveSkills a owl:class ;
