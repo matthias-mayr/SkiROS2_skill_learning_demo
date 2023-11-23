@@ -23,8 +23,8 @@ class PegInsertionEpisode(object):
     def __init__(self, params):
         self.params = params
         self.rewards = dict()
-        self.rewards["performance"] = 0
-        self.rewards["force"] = 0
+        self.rewards["performance"] = 0.0
+        self.rewards["force"] = 0.0
 
         self.state_sub = rospy.Subscriber("/iiwa/CartesianImpedance_trajectory_controller/controller_state", ControllerState, self.state_callback)
         self.force = None
@@ -59,6 +59,12 @@ class PegInsertionEpisode(object):
 
     def get_rewards(self):
         return self.rewards
+    
+    def get_negative_rewards(self):
+        cost = {}
+        for key, value in self.rewards.items():
+            cost[key] = -value
+        return cost
 
 
 class SkirosRlClient(object):
@@ -100,12 +106,20 @@ class SkirosRlClient(object):
 
         if params is not None:
             for key, value in params.items():
+                if type(value) is np.float32:
+                    value = float(value)
                 skill.ph[key].value = value
 
-    # Central function for starting, stopping and ticking
+
     def run_episode(self, params = None, max_time = 15.0):
-        start_time = rospy.Time.now()
+        # Make sure the reset skill has finished
+        if self.reset_id is not None and self.reset_id in self.bt_responses:
+            while self.bt_responses[self.reset_id] != SkillProgress.SUCCESS:
+                rospy.sleep(0.1)
+                rospy.loginfo_throttle(1, "Waiting for reset to finish.")
+        
         print("Starting episode with parameters: ", params)
+        start_time = rospy.Time.now()
         
         skill = self.agent.get_skill(self.skill_name)
         self.set_peg_insertion_parameters(skill, params)
@@ -129,6 +143,7 @@ class SkirosRlClient(object):
         reset_skill = self.agent.get_skill(self.reset_skill_name)
         self.set_peg_insertion_parameters(reset_skill)
         self.reset_id = self.agent.execute(skill_list=[reset_skill])
+        return episode.get_negative_rewards()
 
     # Processes the feedback from SkiROS.
     def process_tree_progress(self, progress):
