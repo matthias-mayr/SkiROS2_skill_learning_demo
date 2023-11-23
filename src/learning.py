@@ -1,6 +1,5 @@
 import math
 import time
-import pickle
 import sys
 import signal
 import rospy
@@ -42,7 +41,7 @@ class PegInsertionEpisode(object):
 
     def calculate_rewards(self):
         if self.force is not None:
-            self.rewards["force"] = -abs(self.force)
+            self.rewards["force"] -= abs(self.force)
         if self.ee_pose is not None:
             def calculate_distance(pose1, pose2):
                 dx = pose1.position.x - pose2.position.x
@@ -66,7 +65,7 @@ class SkirosRlClient(object):
     def __init__(self):
         self.skill_name = rospy.get_param("~skill_name", "peg_insertion")
         self.reset_skill_name = rospy.get_param("~reset_skill_name", "reset_peg_insertion")
-        self.verbose = rospy.get_param("~verbose", True)
+        self.verbose = rospy.get_param("~verbose", False)
 
         self.task_id = 0
         self.reset_id = None
@@ -106,6 +105,7 @@ class SkirosRlClient(object):
     # Central function for starting, stopping and ticking
     def run_episode(self, params = None, max_time = 15.0):
         start_time = rospy.Time.now()
+        print("Starting episode with parameters: ", params)
         
         skill = self.agent.get_skill(self.skill_name)
         self.set_peg_insertion_parameters(skill, params)
@@ -124,7 +124,7 @@ class SkirosRlClient(object):
                 rospy.loginfo("Preempting task.")
                 self.agent.preempt_one(self.task_id)
             episode.final_bt_signal(self.bt_responses[self.task_id])
-        print(episode.get_rewards())
+        print("Rewards: ", episode.get_rewards())
             
         reset_skill = self.agent.get_skill(self.reset_skill_name)
         self.set_peg_insertion_parameters(reset_skill)
