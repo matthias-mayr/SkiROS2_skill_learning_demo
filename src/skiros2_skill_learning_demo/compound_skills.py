@@ -90,6 +90,17 @@ class peg_insertion(SkillBase):
             self.skill("WmSetRelation", "wm_set_relation", remap={'Src': 'Object', 'Dst': 'Container'},  specify={'Relation': 'skiros:at', 'RelationState': True}),
             self.skill("ChangeStiffness", ""),
             )
+        
+
+class peg_insertion_fake(SkillBase):
+    def createDescription(self):
+        self.setDescription(PegInsertion(), self.__class__.__name__)
+
+    def expand(self, skill):
+        skill.setProcessor(SerialStar())
+        skill(
+            self.skill("Wait", "", specify={"Time": 1.0}),
+        )
 
 class reset_peg_insertion(SkillBase):
     def createDescription(self):

@@ -1,5 +1,5 @@
 <launch>
-  <arg name="skill_list" default="[go_to_linear_action, change_stiffness, apply_force, overlay_motion, peg_insertion, go_to_linear, wm_set_relation, reset_peg_insertion, task_plan]"/>
+  <arg name="skill_list" default="[go_to_linear_action, change_stiffness, apply_force, overlay_motion, peg_insertion, go_to_linear, wm_set_relation, reset_peg_insertion, task_plan, wait, peg_insertion_fake]"/>
   <arg name="debug" default="false"/>
   <arg name="verbose" default="false"/>
   <arg name="robot_ontology_prefix" default="iiwa"/>

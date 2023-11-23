@@ -23,8 +23,8 @@ CartesianImpedance_trajectory_controller:
     wrench: 1.0                         # Commanded torque
   verbosity:
     verbose_print: false                # Enables additional prints
-    state_msgs: false                   # Messages of controller state
-    tf_frames: true                    # Extra tf frames
+    state_msgs: true                    # Messages of controller state
+    tf_frames: true                     # Extra tf frames
 
 # Trajectory Generator
 cartesian_trajectory_generator:
