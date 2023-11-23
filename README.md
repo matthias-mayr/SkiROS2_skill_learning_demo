@@ -8,7 +8,13 @@ This repository contains a set of different things:
 * Scripts for learning and plotting
 
 ##  Installation and Setup
-
+```
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+catkin init && catkin build
+git clone https://github.com/matthias-mayr/SkiROS2_skill_learning_demo.git
+SkiROS2_skill_learning_demo/scripts/installation.sh ~/catkin_ws
+```
 
 
 ## Planning
