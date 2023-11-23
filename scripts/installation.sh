@@ -35,6 +35,8 @@ git clone https://github.com/RVMI/skiros2_std_lib
 git clone https://github.com/matthias-mayr/Cartesian-Impedance-Controller
 git clone https://github.com/matthias-mayr/cartesian_trajectory_generator
 
+pip3 install --user hypermapper
+
 ### install dependencies
 # SkiROS2
 cd skiros2

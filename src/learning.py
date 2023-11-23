@@ -15,6 +15,7 @@ import skiros2_common.ros.utils as utils
 from cartesian_impedance_controller.msg import ControllerState
 
 from geometry_msgs.msg import Pose
+from hypermapper import optimizer
 
 # Translates SkiROS skill states to strings
 SkillStateDict = {0: 'unkown', SkillProgress.SUCCESS: 'success', SkillProgress.FAILURE: 'failure', SkillProgress.RUNNING: 'running', SkillProgress.IDLE: 'idle'}
@@ -111,6 +112,8 @@ class SkirosRlClient(object):
                     value = float(value)
                 skill.ph[key].value = value
 
+    def learn(self):
+        optimizer.optimize("src/SkiROS2_skill_learning_demo/config/peg_learning.json", self.run_episode)
 
     def run_episode(self, params = None, max_time = 15.0):
         # Make sure the reset skill has finished
@@ -192,7 +195,7 @@ def main():
     signal.signal(signal.SIGINT, signal_handler)
     rospy.init_node("rl_client")
     rl_client = SkirosRlClient()
-    rl_client.run_episode()
+    rl_client.learn()
 
 
 if __name__ == "__main__":

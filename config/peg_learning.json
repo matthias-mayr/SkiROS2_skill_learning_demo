@@ -1,0 +1,27 @@
+{
+    "application_name": "peg_learning",
+    "optimization_objectives": ["force", "performance"],
+    "optimization_iterations": 60,
+    "input_parameters" : {
+        "Force": {
+            "parameter_type" : "real",
+            "values" : [0.05, 20],
+            "parameter_default" : 0.05
+        },
+        "PathDistance": {
+            "parameter_type" : "real",
+            "values" : [0.0, 0.02],
+            "parameter_default" : 0.0
+        },
+        "Radius": {
+            "parameter_type" : "real",
+            "values" : [0.0, 0.05],
+            "parameter_default" : 0.0
+        },
+        "PathVelocity": {
+            "parameter_type" : "real",
+            "values" : [0.0, 0.3],
+            "parameter_default" : 0.0
+        }
+    }
+}
