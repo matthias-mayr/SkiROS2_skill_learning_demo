@@ -29,54 +29,69 @@ skiros:Scene-0 a skiros:Scene,
 skiros:ApplyForce a owl:class ;
     rdfs:subClassOf skiros:PrimitiveSkills .
 
-skiros:ApplyForce-67 a skiros:ApplyForce,
+skiros:ApplyForce-105 a skiros:ApplyForce,
         owl:NamedIndividual ;
     rdfs:label "apply_force" ;
-    skiros:hasParam skiros:Parameter-68,
-        skiros:Parameter-69 .
+    skiros:hasParam skiros:Parameter-106,
+        skiros:Parameter-107 ;
+    skiros:hasPreCondition skiros:ConditionHasProperty-108 .
 
 skiros:ArmMovement a owl:class ;
     rdfs:subClassOf skiros:PrimitiveSkills .
 
-skiros:ArmMovement-86 a skiros:ArmMovement,
+skiros:ArmMovement-126 a skiros:ArmMovement,
         owl:NamedIndividual ;
     rdfs:label "go_to_linear" ;
-    skiros:hasParam skiros:Parameter-87,
-        skiros:Parameter-88,
-        skiros:Parameter-89,
-        skiros:Parameter-90 ;
-    skiros:hasPostCondition skiros:ConditionRelation-93 ;
-    skiros:hasPreCondition skiros:ConditionRelation-91,
-        skiros:ConditionRelation-92 .
+    skiros:hasParam skiros:Parameter-127,
+        skiros:Parameter-128,
+        skiros:Parameter-129,
+        skiros:Parameter-130 ;
+    skiros:hasPostCondition skiros:ConditionRelation-133 ;
+    skiros:hasPreCondition skiros:ConditionRelation-131,
+        skiros:ConditionRelation-132 .
 
 skiros:ArmMovementAction a owl:class ;
     rdfs:subClassOf skiros:PrimitiveSkills .
 
-skiros:ArmMovementAction-60 a skiros:ArmMovementAction,
+skiros:ArmMovementAction-97 a skiros:ArmMovementAction,
         owl:NamedIndividual ;
     rdfs:label "go_to_linear_action" ;
-    skiros:hasParam skiros:Parameter-61,
-        skiros:Parameter-62,
-        skiros:Parameter-63 .
+    skiros:hasParam skiros:Parameter-100,
+        skiros:Parameter-98,
+        skiros:Parameter-99 .
 
 skiros:ChangeStiffness a owl:class ;
     rdfs:subClassOf skiros:PrimitiveSkills .
 
-skiros:ChangeStiffness-64 a skiros:ChangeStiffness,
+skiros:ChangeStiffness-101 a skiros:ChangeStiffness,
         owl:NamedIndividual ;
     rdfs:label "change_stiffness" ;
-    skiros:hasParam skiros:Parameter-65,
-        skiros:Parameter-66 .
+    skiros:hasParam skiros:Parameter-102,
+        skiros:Parameter-103 ;
+    skiros:hasPreCondition skiros:ConditionHasProperty-104 .
 
-skiros:ConditionRelation-104 a skiros:ConditionRelation,
+skiros:ConditionHasProperty-104 a skiros:ConditionHasProperty,
         owl:NamedIndividual ;
-    rdfs:label "ContainerHasAObservationPose" ;
-    skiros:appliedOnType "skiros:hasA"^^xsd:string ;
+    rdfs:label "ArmHasCartesianStiffnessTopic" ;
+    skiros:appliedOnType "skiros:CartesianStiffnessTopic"^^xsd:string ;
     skiros:desiredState true ;
-    skiros:hasObject "ObservationPose"^^xsd:string ;
-    skiros:hasSubject "Container"^^xsd:string .
+    skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-79 a skiros:ConditionRelation,
+skiros:ConditionHasProperty-108 a skiros:ConditionHasProperty,
+        owl:NamedIndividual ;
+    rdfs:label "ArmHasCartesianWrenchTopic" ;
+    skiros:appliedOnType "skiros:CartesianWrenchTopic"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionHasProperty-112 a skiros:ConditionHasProperty,
+        owl:NamedIndividual ;
+    rdfs:label "ArmHasOverlayMotionService" ;
+    skiros:appliedOnType "skiros:OverlayMotionService"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-119 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "Holding" ;
     skiros:appliedOnType "skiros:contain"^^xsd:string ;
@@ -84,7 +99,7 @@ skiros:ConditionRelation-79 a skiros:ConditionRelation,
     skiros:hasObject "Object"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-80 a skiros:ConditionRelation,
+skiros:ConditionRelation-120 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "NotObjectAtContainer" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -92,7 +107,7 @@ skiros:ConditionRelation-80 a skiros:ConditionRelation,
     skiros:hasObject "Container"^^xsd:string ;
     skiros:hasSubject "Object"^^xsd:string .
 
-skiros:ConditionRelation-81 a skiros:ConditionRelation,
+skiros:ConditionRelation-121 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "ArmAtObservationPose" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -100,7 +115,7 @@ skiros:ConditionRelation-81 a skiros:ConditionRelation,
     skiros:hasObject "ObservationPose"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-82 a skiros:ConditionRelation,
+skiros:ConditionRelation-122 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "ContainerHasAObservationPose" ;
     skiros:appliedOnType "skiros:hasA"^^xsd:string ;
@@ -108,7 +123,7 @@ skiros:ConditionRelation-82 a skiros:ConditionRelation,
     skiros:hasObject "ObservationPose"^^xsd:string ;
     skiros:hasSubject "Container"^^xsd:string .
 
-skiros:ConditionRelation-83 a skiros:ConditionRelation,
+skiros:ConditionRelation-123 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "Holding" ;
     skiros:appliedOnType "skiros:contain"^^xsd:string ;
@@ -116,7 +131,7 @@ skiros:ConditionRelation-83 a skiros:ConditionRelation,
     skiros:hasObject "Object"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-84 a skiros:ConditionRelation,
+skiros:ConditionRelation-124 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "ObjectAtContainer" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -124,7 +139,7 @@ skiros:ConditionRelation-84 a skiros:ConditionRelation,
     skiros:hasObject "Container"^^xsd:string ;
     skiros:hasSubject "Object"^^xsd:string .
 
-skiros:ConditionRelation-85 a skiros:ConditionRelation,
+skiros:ConditionRelation-125 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "NotArmInOversationPose" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -132,7 +147,7 @@ skiros:ConditionRelation-85 a skiros:ConditionRelation,
     skiros:hasObject "ObservationPose"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-91 a skiros:ConditionRelation,
+skiros:ConditionRelation-131 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "ArmAtStart" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -140,7 +155,7 @@ skiros:ConditionRelation-91 a skiros:ConditionRelation,
     skiros:hasObject "Start"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-92 a skiros:ConditionRelation,
+skiros:ConditionRelation-132 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "NotArmAtTarget" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
@@ -148,12 +163,76 @@ skiros:ConditionRelation-92 a skiros:ConditionRelation,
     skiros:hasObject "Target"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
-skiros:ConditionRelation-93 a skiros:ConditionRelation,
+skiros:ConditionRelation-133 a skiros:ConditionRelation,
         owl:NamedIndividual ;
     rdfs:label "ArmAtTarget" ;
     skiros:appliedOnType "skiros:at"^^xsd:string ;
     skiros:desiredState true ;
     skiros:hasObject "Target"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-144 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ContainerHasAObservationPose" ;
+    skiros:appliedOnType "skiros:hasA"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "ObservationPose"^^xsd:string ;
+    skiros:hasSubject "Container"^^xsd:string .
+
+skiros:ConditionRelation-155 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "Holding" ;
+    skiros:appliedOnType "skiros:contain"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "Object"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-156 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "NotObjectAtContainer" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState false ;
+    skiros:hasObject "Container"^^xsd:string ;
+    skiros:hasSubject "Object"^^xsd:string .
+
+skiros:ConditionRelation-157 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ArmAtObservationPose" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "ObservationPose"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-158 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ContainerHasAObservationPose" ;
+    skiros:appliedOnType "skiros:hasA"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "ObservationPose"^^xsd:string ;
+    skiros:hasSubject "Container"^^xsd:string .
+
+skiros:ConditionRelation-159 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "Holding" ;
+    skiros:appliedOnType "skiros:contain"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "Object"^^xsd:string ;
+    skiros:hasSubject "Arm"^^xsd:string .
+
+skiros:ConditionRelation-160 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "ObjectAtContainer" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState true ;
+    skiros:hasObject "Container"^^xsd:string ;
+    skiros:hasSubject "Object"^^xsd:string .
+
+skiros:ConditionRelation-161 a skiros:ConditionRelation,
+        owl:NamedIndividual ;
+    rdfs:label "NotArmInOversationPose" ;
+    skiros:appliedOnType "skiros:at"^^xsd:string ;
+    skiros:desiredState false ;
+    skiros:hasObject "ObservationPose"^^xsd:string ;
     skiros:hasSubject "Arm"^^xsd:string .
 
 skiros:Container-4 a skiros:Container,
@@ -162,43 +241,38 @@ skiros:Container-4 a skiros:Container,
     skiros:BaseFrameId "world"^^xsd:string ;
     skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
     skiros:FrameId "skiros:Container-4"^^xsd:string ;
-    skiros:OrientationW "0.0"^^xsd:float ;
-    skiros:OrientationX "1.0"^^xsd:float ;
-    skiros:OrientationY "0.0"^^xsd:float ;
-    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:OrientationW "-2.1060381458432664e-07"^^xsd:float ;
+    skiros:OrientationX "0.0"^^xsd:float ;
+    skiros:OrientationY "-0.9999999999999768"^^xsd:float ;
+    skiros:OrientationZ "-4.699217449897631e-08"^^xsd:float ;
     skiros:PositionX "0.5"^^xsd:float ;
     skiros:PositionY "0.0"^^xsd:float ;
-    skiros:PositionZ "0.05"^^xsd:float ;
+    skiros:PositionZ "0.05000000074505806"^^xsd:float ;
     skiros:PublishTf true ;
+    skiros:TfTimeStamp "0.0"^^xsd:float ;
     skiros:hasA skiros:ObservationPose-5 .
 
 skiros:OverlayMotion a owl:class ;
     rdfs:subClassOf skiros:PrimitiveSkills .
 
-skiros:OverlayMotion-70 a skiros:OverlayMotion,
+skiros:OverlayMotion-109 a skiros:OverlayMotion,
         owl:NamedIndividual ;
     rdfs:label "overlay_motion" ;
-    skiros:hasParam skiros:Parameter-71,
-        skiros:Parameter-72 .
+    skiros:hasParam skiros:Parameter-110,
+        skiros:Parameter-111 ;
+    skiros:hasPreCondition skiros:ConditionHasProperty-112 .
 
 skiros:Parameter-100 a skiros:Parameter,
         owl:NamedIndividual ;
-    rdfs:label "Arm" ;
-    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
-    skiros:ParameterType 0 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-101 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Container" ;
-    skiros:DataType "skiros:Container"^^xsd:string ;
-    skiros:ParameterType 0 ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
 skiros:Parameter-102 a skiros:Parameter,
         owl:NamedIndividual ;
-    rdfs:label "Object" ;
-    skiros:DataType "skiros:Product"^^xsd:string ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
@@ -211,183 +285,245 @@ skiros:Parameter-103 a skiros:Parameter,
 
 skiros:Parameter-106 a skiros:Parameter,
         owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-107 a skiros:Parameter,
+        owl:NamedIndividual ;
     rdfs:label "Robot" ;
     skiros:DataType "sumo:Agent"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-61 a skiros:Parameter,
+skiros:Parameter-110 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Arm" ;
     skiros:DataType "rparts:ArmDevice"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-62 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Target" ;
-    skiros:DataType "sumo:Object"^^xsd:string ;
-    skiros:ParameterType 0 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-63 a skiros:Parameter,
+skiros:Parameter-111 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Robot" ;
     skiros:DataType "sumo:Agent"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-65 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Arm" ;
-    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
-    skiros:ParameterType 0 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-66 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Robot" ;
-    skiros:DataType "sumo:Agent"^^xsd:string ;
-    skiros:ParameterType 2 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-68 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Arm" ;
-    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
-    skiros:ParameterType 0 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-69 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Robot" ;
-    skiros:DataType "sumo:Agent"^^xsd:string ;
-    skiros:ParameterType 2 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-71 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Arm" ;
-    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
-    skiros:ParameterType 0 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-72 a skiros:Parameter,
-        owl:NamedIndividual ;
-    rdfs:label "Robot" ;
-    skiros:DataType "sumo:Agent"^^xsd:string ;
-    skiros:ParameterType 2 ;
-    rdfs:comment ""^^xsd:string .
-
-skiros:Parameter-74 a skiros:Parameter,
+skiros:Parameter-114 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "ObservationPose" ;
     skiros:DataType "skiros:ObservationPose"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-75 a skiros:Parameter,
+skiros:Parameter-115 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Arm" ;
     skiros:DataType "rparts:ArmDevice"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-76 a skiros:Parameter,
+skiros:Parameter-116 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Container" ;
     skiros:DataType "skiros:Container"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-77 a skiros:Parameter,
+skiros:Parameter-117 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Object" ;
     skiros:DataType "skiros:Product"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-78 a skiros:Parameter,
+skiros:Parameter-118 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Robot" ;
     skiros:DataType "sumo:Agent"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-87 a skiros:Parameter,
+skiros:Parameter-127 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Arm" ;
     skiros:DataType "rparts:ArmDevice"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-88 a skiros:Parameter,
+skiros:Parameter-128 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Target" ;
     skiros:DataType "sumo:Object"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-89 a skiros:Parameter,
+skiros:Parameter-129 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Start" ;
     skiros:DataType "sumo:Object"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-90 a skiros:Parameter,
+skiros:Parameter-130 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Robot" ;
     skiros:DataType "sumo:Agent"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-95 a skiros:Parameter,
+skiros:Parameter-135 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Src" ;
     skiros:DataType "sumo:Object"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-96 a skiros:Parameter,
+skiros:Parameter-136 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Dst" ;
     skiros:DataType "sumo:Object"^^xsd:string ;
     skiros:ParameterType 0 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-97 a skiros:Parameter,
+skiros:Parameter-137 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "Robot" ;
     skiros:DataType "sumo:Agent"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:Parameter-99 a skiros:Parameter,
+skiros:Parameter-139 a skiros:Parameter,
         owl:NamedIndividual ;
     rdfs:label "ObservationPose" ;
     skiros:DataType "skiros:ObservationPose"^^xsd:string ;
     skiros:ParameterType 2 ;
     rdfs:comment ""^^xsd:string .
 
-skiros:PegInsertion a owl:class ;
-    rdfs:subClassOf skiros:CompoundSkills .
+skiros:Parameter-140 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
 
-skiros:PegInsertion-73 a skiros:PegInsertion,
+skiros:Parameter-141 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Container" ;
+    skiros:DataType "skiros:Container"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-142 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Object" ;
+    skiros:DataType "skiros:Product"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-143 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-146 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-148 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-150 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "ObservationPose" ;
+    skiros:DataType "skiros:ObservationPose"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-151 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-152 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Container" ;
+    skiros:DataType "skiros:Container"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-153 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Object" ;
+    skiros:DataType "skiros:Product"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-154 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Robot" ;
+    skiros:DataType "sumo:Agent"^^xsd:string ;
+    skiros:ParameterType 2 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-98 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Arm" ;
+    skiros:DataType "rparts:ArmDevice"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:Parameter-99 a skiros:Parameter,
+        owl:NamedIndividual ;
+    rdfs:label "Target" ;
+    skiros:DataType "sumo:Object"^^xsd:string ;
+    skiros:ParameterType 0 ;
+    rdfs:comment ""^^xsd:string .
+
+skiros:PegInsertion-113 a skiros:PegInsertion,
         owl:NamedIndividual ;
     rdfs:label "peg_insertion" ;
-    skiros:hasHoldCondition skiros:ConditionRelation-83 ;
-    skiros:hasParam skiros:Parameter-74,
-        skiros:Parameter-75,
-        skiros:Parameter-76,
-        skiros:Parameter-77,
-        skiros:Parameter-78 ;
-    skiros:hasPostCondition skiros:ConditionRelation-84,
-        skiros:ConditionRelation-85 ;
-    skiros:hasPreCondition skiros:ConditionRelation-79,
-        skiros:ConditionRelation-80,
-        skiros:ConditionRelation-81,
-        skiros:ConditionRelation-82 .
+    skiros:hasHoldCondition skiros:ConditionRelation-123 ;
+    skiros:hasParam skiros:Parameter-114,
+        skiros:Parameter-115,
+        skiros:Parameter-116,
+        skiros:Parameter-117,
+        skiros:Parameter-118 ;
+    skiros:hasPostCondition skiros:ConditionRelation-124,
+        skiros:ConditionRelation-125 ;
+    skiros:hasPreCondition skiros:ConditionRelation-119,
+        skiros:ConditionRelation-120,
+        skiros:ConditionRelation-121,
+        skiros:ConditionRelation-122 .
+
+skiros:PegInsertion-149 a skiros:PegInsertion,
+        owl:NamedIndividual ;
+    rdfs:label "peg_insertion_fake" ;
+    skiros:hasHoldCondition skiros:ConditionRelation-159 ;
+    skiros:hasParam skiros:Parameter-150,
+        skiros:Parameter-151,
+        skiros:Parameter-152,
+        skiros:Parameter-153,
+        skiros:Parameter-154 ;
+    skiros:hasPostCondition skiros:ConditionRelation-160,
+        skiros:ConditionRelation-161 ;
+    skiros:hasPreCondition skiros:ConditionRelation-155,
+        skiros:ConditionRelation-156,
+        skiros:ConditionRelation-157,
+        skiros:ConditionRelation-158 .
 
 skiros:Product-3 a skiros:Product,
         owl:NamedIndividual ;
@@ -396,84 +532,26 @@ skiros:Product-3 a skiros:Product,
 skiros:ResetPegInsertion a owl:class ;
     rdfs:subClassOf skiros:CompoundSkills .
 
-skiros:ResetPegInsertion-98 a skiros:ResetPegInsertion,
+skiros:ResetPegInsertion-138 a skiros:ResetPegInsertion,
         owl:NamedIndividual ;
     rdfs:label "reset_peg_insertion" ;
-    skiros:hasParam skiros:Parameter-100,
-        skiros:Parameter-101,
-        skiros:Parameter-102,
-        skiros:Parameter-103,
-        skiros:Parameter-99 ;
-    skiros:hasPreCondition skiros:ConditionRelation-104 .
+    skiros:hasParam skiros:Parameter-139,
+        skiros:Parameter-140,
+        skiros:Parameter-141,
+        skiros:Parameter-142,
+        skiros:Parameter-143 ;
+    skiros:hasPreCondition skiros:ConditionRelation-144 .
 
 skiros:TaskPlan a owl:class ;
     rdfs:subClassOf skiros:TaskPlanner .
 
-skiros:TaskPlan-105 a skiros:TaskPlan,
+skiros:TaskPlan-145 a skiros:TaskPlan,
         owl:NamedIndividual ;
     rdfs:label "task_plan" ;
-    skiros:hasParam skiros:Parameter-106 .
+    skiros:hasParam skiros:Parameter-146 .
 
 skiros:TaskPlanner a owl:class ;
     rdfs:subClassOf skiros:Skiros2StdSkills .
-
-skiros:UtilityPrimitives a owl:class ;
-    rdfs:subClassOf skiros:Skiros2StdSkills .
-
-skiros:WmSetRelation a owl:class ;
-    rdfs:subClassOf skiros:UtilityPrimitives .
-
-skiros:WmSetRelation-94 a skiros:WmSetRelation,
-        owl:NamedIndividual ;
-    rdfs:label "wm_set_relation" ;
-    skiros:hasParam skiros:Parameter-95,
-        skiros:Parameter-96,
-        skiros:Parameter-97 .
-
-cora:Robot-1 a cora:Robot,
-        owl:NamedIndividual ;
-    rdfs:label "iiwa:iiwa_robot" ;
-    skiros:BaseFrameId ""^^xsd:string ;
-    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
-    skiros:FrameId "cora:Robot-1"^^xsd:string ;
-    skiros:PublishTf true ;
-    skiros:SkillMgr "iiwa_robot"^^xsd:string ;
-    skiros:Template "iiwa:iiwa_robot"^^xsd:string ;
-    skiros:hasA rparts:ArmDevice-2 ;
-    skiros:hasSkill skiros:ApplyForce-67,
-        skiros:ArmMovement-86,
-        skiros:ArmMovementAction-60,
-        skiros:ChangeStiffness-64,
-        skiros:OverlayMotion-70,
-        skiros:PegInsertion-73,
-        skiros:ResetPegInsertion-98,
-        skiros:TaskPlan-105,
-        skiros:WmSetRelation-94 ;
-    skiros:hasTemplate iiwa:iiwa_robot .
-
-skiros:CompoundSkills a owl:class ;
-    rdfs:subClassOf skiros:Skiros2SkillLearningDemo .
-
-skiros:ObservationPose-5 a skiros:ObservationPose,
-        owl:NamedIndividual ;
-    rdfs:label "Box observation" ;
-    skiros:BaseFrameId "skiros:Container-4"^^xsd:string ;
-    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
-    skiros:FrameId "skiros:ObservationPose-5"^^xsd:string ;
-    skiros:OrientationW "1.0"^^xsd:float ;
-    skiros:OrientationX "0.0"^^xsd:float ;
-    skiros:OrientationY "0.0"^^xsd:float ;
-    skiros:OrientationZ "0.0"^^xsd:float ;
-    skiros:PositionX "0.0"^^xsd:float ;
-    skiros:PositionY "0.0"^^xsd:float ;
-    skiros:PositionZ "-0.4"^^xsd:float ;
-    skiros:PublishTf true .
-
-skiros:Skiros2SkillLearningDemo a owl:class ;
-    rdfs:subClassOf skiros:Skill .
-
-skiros:Skiros2StdSkills a owl:class ;
-    rdfs:subClassOf skiros:Skill .
 
 skiros:TransformationPose-6 a skiros:TransformationPose,
         owl:NamedIndividual ;
@@ -490,6 +568,62 @@ skiros:TransformationPose-6 a skiros:TransformationPose,
     skiros:PositionZ "0.5"^^xsd:float ;
     skiros:PublishTf true .
 
+skiros:Wait a owl:class ;
+    rdfs:subClassOf skiros:UtilityPrimitives .
+
+skiros:Wait-147 a skiros:Wait,
+        owl:NamedIndividual ;
+    rdfs:label "wait" ;
+    skiros:hasParam skiros:Parameter-148 .
+
+skiros:WmSetRelation a owl:class ;
+    rdfs:subClassOf skiros:UtilityPrimitives .
+
+skiros:WmSetRelation-134 a skiros:WmSetRelation,
+        owl:NamedIndividual ;
+    rdfs:label "wm_set_relation" ;
+    skiros:hasParam skiros:Parameter-135,
+        skiros:Parameter-136,
+        skiros:Parameter-137 .
+
+cora:Robot-1 a cora:Robot,
+        owl:NamedIndividual ;
+    rdfs:label "iiwa:iiwa_robot" ;
+    skiros:BaseFrameId ""^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "cora:Robot-1"^^xsd:string ;
+    skiros:PublishTf true ;
+    skiros:SkillMgr "iiwa_robot"^^xsd:string ;
+    skiros:Template "iiwa:iiwa_robot"^^xsd:string ;
+    skiros:hasA rparts:ArmDevice-2 ;
+    skiros:hasSkill skiros:ApplyForce-105,
+        skiros:ArmMovement-126,
+        skiros:ArmMovementAction-97,
+        skiros:ChangeStiffness-101,
+        skiros:OverlayMotion-109,
+        skiros:PegInsertion-113,
+        skiros:PegInsertion-149,
+        skiros:ResetPegInsertion-138,
+        skiros:TaskPlan-145,
+        skiros:Wait-147,
+        skiros:WmSetRelation-134 ;
+    skiros:hasTemplate iiwa:iiwa_robot .
+
+skiros:CompoundSkills a owl:class ;
+    rdfs:subClassOf skiros:Skiros2SkillLearningDemo .
+
+skiros:PegInsertion a owl:class ;
+    rdfs:subClassOf skiros:CompoundSkills .
+
+skiros:Skiros2SkillLearningDemo a owl:class ;
+    rdfs:subClassOf skiros:Skill .
+
+skiros:Skiros2StdSkills a owl:class ;
+    rdfs:subClassOf skiros:Skill .
+
+skiros:UtilityPrimitives a owl:class ;
+    rdfs:subClassOf skiros:Skiros2StdSkills .
+
 rparts:ArmDevice-2 a rparts:ArmDevice,
         owl:NamedIndividual ;
     rdfs:label "iiwa Arm" ;
@@ -502,6 +636,21 @@ rparts:ArmDevice-2 a rparts:ArmDevice,
     skiros:Weight "20.0"^^xsd:float ;
     skiros:at skiros:ObservationPose-5 ;
     skiros:contain skiros:Product-3 .
+
+skiros:ObservationPose-5 a skiros:ObservationPose,
+        owl:NamedIndividual ;
+    rdfs:label "Box observation" ;
+    skiros:BaseFrameId "skiros:Container-4"^^xsd:string ;
+    skiros:DiscreteReasoner "AauSpatialReasoner"^^xsd:string ;
+    skiros:FrameId "skiros:ObservationPose-5"^^xsd:string ;
+    skiros:OrientationW "1.0"^^xsd:float ;
+    skiros:OrientationX "0.0"^^xsd:float ;
+    skiros:OrientationY "0.0"^^xsd:float ;
+    skiros:OrientationZ "0.0"^^xsd:float ;
+    skiros:PositionX "0.0"^^xsd:float ;
+    skiros:PositionY "0.0"^^xsd:float ;
+    skiros:PositionZ "-0.4"^^xsd:float ;
+    skiros:PublishTf true .
 
 skiros:PrimitiveSkills a owl:class ;
     rdfs:subClassOf skiros:Skiros2SkillLearningDemo .
