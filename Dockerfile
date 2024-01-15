@@ -1,5 +1,6 @@
 # Use ROS Noetic base image
 FROM ros:noetic-ros-base
+RUN apt-get update && apt-get install python3-catkin-tools
 
 # Set the working directory in the container
 RUN mkdir /catkin_ws/
