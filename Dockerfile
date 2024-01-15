@@ -12,6 +12,6 @@ COPY scripts/installation.sh .
 RUN chmod +x installation.sh
 
 # Execute the install script
-RUN ./installion.sh /catkin_ws
+RUN ./installation.sh /catkin_ws
 
 ENTRYPOINT ["bash"]
