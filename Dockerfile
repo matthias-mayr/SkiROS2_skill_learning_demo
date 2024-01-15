@@ -1,6 +1,8 @@
 # Use ROS Noetic base image
 FROM ros:noetic-ros-base
 RUN apt-get update && apt-get install -y python3-catkin-tools
+# Source for ROS setup
+RUN . /opt/ros/noetic/setup.sh
 
 # Set the working directory in the container
 RUN mkdir -p /catkin_ws/src
