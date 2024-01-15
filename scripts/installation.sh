@@ -24,6 +24,7 @@ if [ ! -f "$1"/devel/setup.bash ]; then
     exit 1
 fi
 
+# Get the workspace folder
 ws=$(readlink -f "$1")
 
 # clone packages
