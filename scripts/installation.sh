@@ -40,6 +40,7 @@ git clone https://github.com/matthias-mayr/Cartesian-Impedance-Controller
 git clone https://github.com/matthias-mayr/cartesian_trajectory_generator
 
 pip3 install --user hypermapper
+pip3 install --upgrade numpy
 
 ### install dependencies
 # SkiROS2

@@ -11,7 +11,7 @@ Before jumping right into it, it can be worthwhile to learn a bit about [SkiROS2
 
 * **A full introduction and the tutorials are located in the SkiROS2 [wiki](https://github.com/RVMI/skiros2/wiki)**
 * Executable skill examples are in the [skiros2_examples repository](https://github.com/RVMI/skiros2_examples) which is also included in this setup
-* The [SkiROS2 paper](https://arxiv.org/abs/2306.17030) provides an overview and background information
+* The [SkiROS2 paper](https://ieeexplore.ieee.org/abstract/document/10342216) ([arXiv](https://arxiv.org/abs/2306.17030)) provides an overview and background information
 * The [skiros2_template_lib](https://github.com/RVMI/skiros2_template_lib) provides a skeleton for new skill  library
 
 ##  Installation and Setup
@@ -28,8 +28,13 @@ source devel/setup.bash
 ```
 ### Docker
 
-We need to spawn graphical windows for some parts of the demo:
+Pull the docker container with:
+```sh
+docker pull matthiasmayr/skiros2_skill_learning_demo:main
 ```
+
+The run command is extended, so we can spawn graphical windows for the demo:
+```sh
 docker run --rm -it \
     --device=/dev/dri:/dev/dri \
     --ipc=host \
@@ -38,7 +43,7 @@ docker run --rm -it \
     --env DISPLAY=$DISPLAY \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --volume ~/.Xauthority:/root/.Xauthority
-    container_name
+    matthiasmayr/skiros2_skill_learning_demo:main
 ```
 
 ## Startup
@@ -69,7 +74,7 @@ You should see Gazebo, RViz and the SkiROS GUI:
 ## Planning
 
 The peg insertion skill and the goto skill can be used for planning. To do that, select the skill `task_plan` and add the following planning goal:
-```pddl
+```
 (skiros:at skiros:Product-3 skiros:Container-4)
 ```
 
@@ -165,7 +170,7 @@ The Pareto-optimal points can be identified with the following command:
 # and plotted with
 ~/.local/bin/hm-plot-pareto /catkin_ws/src/SkiROS2_skill_learning_demo/config/peg_learning.json
 ```
-It will create a file called `peg_learning_output_pareto.pdf` that contains the Pareto-optimal points. To view it, one can for example use the lightweight `mupdf` viewer:
+It will create a csv file with the Pareto-optimal parameter sets and also `peg_learning_output_pareto.pdf` that contains a plot the Pareto-optimal points. To view it, one can for example use the lightweight `mupdf` viewer:
 ```sh
 apt install mupdf
 mupdf peg_learning_output_pareto.pdf
@@ -173,12 +178,17 @@ mupdf peg_learning_output_pareto.pdf
 
 # Next Steps
 If this gained your interest, you can learn more about learning with skills in these paper:
+* The [SkiROS2 paper](https://ieeexplore.ieee.org/abstract/document/10342216) ([arXiv](https://arxiv.org/abs/2306.17030)) provides a SkiROS2 overview and background information
 * [Skill-based Multi-objective Reinforcement Learning of Industrial Robot Tasks with Planning and Knowledge Integration](https://ieeexplore.ieee.org/document/10011996)
 * [Learning Skill-based Industrial Robot Tasks with User Priors](https://ieeexplore.ieee.org/document/9926713)
 * [Learning to Adapt the Parameters of Behavior Trees and Motion Generators (BTMGs) to Task Variations](https://ieeexplore.ieee.org/document/10341636)
 
-You can check out the code behind those papers here: https://github.com/matthias-mayr/SkiREIL
 
+The dissertation *Learning with Skill-based Robot Systems* includes the papers and provides a more comprehensive overview. It is [available here](https://portal.research.lu.se/en/publications/learning-with-skill-based-robot-systems-combining-planning-amp-kn).
+
+Furthermore:
+
+* You can check out the code behind the above-mentioned papers here: https://github.com/matthias-mayr/SkiREIL
 * Our latest submission **BeBOP** uses learning an planning to create reactive behavior trees for industrial robots. The [code is here](https://github.com/jstyrud/BeBOP) and the [paper is available here](https://arxiv.org/abs/2310.00971).
 * For general robot deliberation resources, there is an [awesome list](https://github.com/ros-wg-delib/awesome-ros-deliberation).
 * More info about SkiROS is available in the [SkiROS2 repo](https://github.com/RVMI/skiros2). There is also always [the SkiROS2 paper](https://ieeexplore.ieee.org/abstract/document/10342216).
