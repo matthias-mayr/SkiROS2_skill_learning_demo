@@ -34,6 +34,7 @@ cd "$ws"/src
 git clone https://github.com/epfl-lasa/iiwa_ros
 git clone https://github.com/RVMI/skiros2
 git clone https://github.com/RVMI/skiros2_std_lib
+git clone https://github.com/RVMI/skiros2_examples
 
 git clone https://github.com/matthias-mayr/Cartesian-Impedance-Controller
 git clone https://github.com/matthias-mayr/cartesian_trajectory_generator
