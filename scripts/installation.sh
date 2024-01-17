@@ -24,6 +24,8 @@ if [ ! -f "$1"/devel/setup.bash ]; then
     exit 1
 fi
 
+sudo apt-get update && sudo apt-get install -y git tmux python3-pip python3-catkin-tools ros-noetic-rosmon
+
 # Get the workspace folder
 ws=$(readlink -f "$1")
 
