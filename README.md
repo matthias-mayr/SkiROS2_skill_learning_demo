@@ -42,7 +42,7 @@ docker run --rm -it \
     --privileged \
     --env DISPLAY=$DISPLAY \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    --volume ~/.Xauthority:/root/.Xauthority
+    --volume ~/.Xauthority:/root/.Xauthority \
     matthiasmayr/skiros2_skill_learning_demo:main
 ```
 
@@ -52,7 +52,7 @@ There is a startup script based on *tmux* in the scripts folder. It can be execu
 ```sh
 rosrun skiros2_skill_learning_demo startup_tmux.sh 
 ```
-<img src='./res/images/tmux.png' width='400'>
+<img src='./res/images/tmux.png' width='600'>
 
 ### Manual Startup
 Launch the robot setup with
@@ -67,9 +67,9 @@ mon launch skiros2_skill_learning_demo skiros.launch
 ### Expected Outcome
 You should see Gazebo, RViz and the SkiROS GUI:
 
-<img src='./res/images/gazebo.png' width='400'>
-<img src='./res/images/rviz.png' width='455'>
-<img src='./res/images/skiros2.png' width='380'>
+<img src='./res/images/gazebo.png' width='600'>
+<img src='./res/images/rviz.png' width='600'>
+<img src='./res/images/skiros2.png' width='600'>
 
 ## Planning
 
@@ -146,7 +146,8 @@ Here is an excerpt:
             "values" : [0.05, 20],
             "parameter_default" : 0.05
         },
-    [...]
+    ...
+    }
 ```
 
 hypermapper has many more options that are documented in the [hypermapper wiki](https://github.com/luinardi/hypermapper/wiki/Json-Parameters-File).
