@@ -24,6 +24,9 @@ if [ ! -f "$1"/devel/setup.bash ]; then
     exit 1
 fi
 
+sudo apt-get update && sudo apt-get install -y git tmux python3-pip python3-catkin-tools ros-noetic-rosmon
+
+# Get the workspace folder
 ws=$(readlink -f "$1")
 
 # clone packages
@@ -31,11 +34,13 @@ cd "$ws"/src
 git clone https://github.com/epfl-lasa/iiwa_ros
 git clone https://github.com/RVMI/skiros2
 git clone https://github.com/RVMI/skiros2_std_lib
+git clone https://github.com/RVMI/skiros2_examples
 
 git clone https://github.com/matthias-mayr/Cartesian-Impedance-Controller
 git clone https://github.com/matthias-mayr/cartesian_trajectory_generator
 
 pip3 install --user hypermapper
+pip3 install --upgrade numpy
 
 ### install dependencies
 # SkiROS2
